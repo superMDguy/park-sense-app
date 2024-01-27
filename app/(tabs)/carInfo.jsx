@@ -1,18 +1,27 @@
 import { StyleSheet } from "react-native";
 
-import EditScreenInfo from "~/components/EditScreenInfo";
-import { Text, View } from "~/components/Themed";
+import { Text } from "~/components/Themed";
+import { Button, View } from "react-native-ui-lib";
 
 export default function TabOneScreen() {
+  const carInfo = {
+    make: "Toyota",
+    model: "Corolla",
+    year: 2010,
+    licensePlate: "MGB-2908",
+    expires: "4/5/2023",
+  };
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <Text style={styles.title}>
+        {carInfo.make} {carInfo.model}
+      </Text>
+      <Text>License Plate: {carInfo.licensePlate}</Text>
+      <Text>Valid Through: {carInfo.expires}</Text>
+
+      <View flex row style={{ position: "absolute", bottom: 50 }}>
+        <Button label="Add Car" />
+      </View>
     </View>
   );
 }
