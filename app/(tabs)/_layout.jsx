@@ -27,8 +27,10 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Location",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="location-arrow" color={color} />
+          ),
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
@@ -46,10 +48,17 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="carpool"
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Carpool",
+          tabBarIcon: ({ color }) => <TabBarIcon name="group" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="carInfo"
+        options={{
+          title: "Car Info",
+          tabBarIcon: ({ color }) => <TabBarIcon name="car" color={color} />,
         }}
       />
     </Tabs>

@@ -1,18 +1,43 @@
-import { StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Platform, Text, View, StyleSheet } from "react-native";
+import Device from "expo-device";
+import * as Location from "expo-location";
 
-import EditScreenInfo from "~/components/EditScreenInfo";
-import { Text, View } from "~/components/Themed";
+export default function App() {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
-export default function TabOneScreen() {
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS === "android" && !Device.isDevice) {
+        setErrorMsg(
+          "Oops, this will not work on Snack in an Android Emulator. Try it on your device!",
+        );
+        return;
+      }
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.BestForNavigation,
+      });
+      setLocation(location);
+    })();
+  }, []);
+
+  let text = "Waiting..";
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <Text style={styles.paragraph}>{text}</Text>
     </View>
   );
 }
@@ -22,14 +47,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    padding: 20,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+  paragraph: {
+    fontSize: 18,
+    textAlign: "center",
   },
 });
