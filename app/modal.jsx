@@ -4,7 +4,7 @@ import { Platform, StyleSheet } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Button } from "react-native-ui-lib";
 import { QrCodeSvg } from "react-native-qr-svg";
-// import ScanQR from "../components/ScanQR";
+import ScanQR from "../components/ScanQR";
 
 import { Text, View } from "~/components/Themed";
 import { Colors } from "react-native-ui-lib";
@@ -30,7 +30,12 @@ export default function ModalScreen() {
         </>
       )}
 
-      {screen === "passenger" && <Text style={styles.title}>QR</Text>}
+      {screen === "passenger" && (
+        <>
+          <Text style={styles.title}>QR</Text>
+          <ScanQR />
+        </>
+      )}
       {screen === "driver" && (
         <>
           <Text style={styles.title}>Driver</Text>

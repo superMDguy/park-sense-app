@@ -36,9 +36,9 @@
     "plugins": [
       "expo-router",
       [
-        "react-native-vision-camera",
+        "expo-barcode-scanner",
         {
-          "enableCodeScanner": true
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
         }
       ]
     ],

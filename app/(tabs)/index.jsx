@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Platform, ActivityIndicator, View, StyleSheet } from "react-native";
 import Svg, { Path, Circle, Ellipse } from "react-native-svg";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Polygon, UrlTile } from "react-native-maps";
 import Device from "expo-device";
 import { Button, LoaderScreen, Colors } from "react-native-ui-lib";
 import { router } from "expo-router";
@@ -70,10 +70,19 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} region={location}>
-        <Marker coordinate={location}>
-          <View>{icon()}</View>
-        </Marker>
+      <MapView
+        style={styles.map}
+        region={location}
+        showsUserLocation={true}
+        followsUserLocation={true}
+      >
+        <UrlTile
+          urlTemplate={
+            "https://services.arcgis.com/FvF9MZKp3JWPrSkg/arcgis/rest/services/BYU_Campus_Parking/FeatureServer/0/query?f=pbf&geometry=%7B%22spatialReference%22%3A%7B%22latestWkid%22%3A3857%2C%22wkid%22%3A102100%7D%2C%22xmin%22%3A{x}%2C%22ymin%22%3A4{y}%2C%22xmax%22%3A{x}%2C%22ymax%22%3A{y}%7D&maxRecordCountFactor=3&resultOffset=0&resultRecordCount=8000&where=1%3D1&orderByFields=OBJECTID%20ASC&outFields=Lot_Type%2COBJECTID%2Cpermit_typ&outSR=102100&quantizationParameters=%7B%22extent%22%3A%7B%22spatialReference%22%3A%7B%22latestWkid%22%3A3857%2C%22wkid%22%3A102100%7D%2C%22xmin%22%3A-12429272.295395683%2C%22ymin%22%3A4900530.757420925%2C%22xmax%22%3A-12428049.30294312%2C%22ymax%22%3A4901753.749873487%7D%2C%22mode%22%3A%22view%22%2C%22originPosition%22%3A%22upperLeft%22%2C%22tolerance%22%3A2.388657133911135%7D&resultType=tile&returnCentroid=true&spatialRel=esriSpatialRelIntersects&geometryType=esriGeometryEnvelope&inSR=102100"
+          }
+          minimumZ={0}
+          maximumZ={20}
+        />
       </MapView>
       {loading && (
         <LoaderScreen
