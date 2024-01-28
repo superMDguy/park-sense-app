@@ -14,13 +14,11 @@ export default function TabOneScreen() {
   return (
     <View flex style={styles.container}>
       <View>
-        <View style={{backgroundColor: '#d3d3d3'}}>
-          <Text style={{padding: 10}}>
-            Active Vehicles
-          </Text>
+        <View style={{ backgroundColor: "#d3d3d3" }}>
+          <Text style={{ padding: 10 }}>Active Vehicles</Text>
         </View>
-        <View style={{backgroundColor: '#90EE90'}}>
-          <View style={{padding: 10}}>
+        <View style={{ backgroundColor: "#90EE90" }}>
+          <View style={{ padding: 10 }}>
             <Text style={styles.title}>
               {carInfo.make} {carInfo.model}
             </Text>
@@ -29,7 +27,16 @@ export default function TabOneScreen() {
           </View>
         </View>
       </View>
-      <View flex row style={{ position: "absolute", bottom: 50, width: '100%', justifyContent: 'center' }}>
+      <View
+        flex
+        row
+        style={{
+          position: "absolute",
+          bottom: 50,
+          width: "100%",
+          justifyContent: "center",
+        }}
+      >
         <Button label="Add Car" />
       </View>
     </View>
@@ -37,9 +44,7 @@ export default function TabOneScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-
-  },
+  container: {},
   title: {
     fontSize: 20,
     fontWeight: "bold",
@@ -50,7 +55,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   car: {
-    backgroundColor: 'red',
-    marginLeft: '100px',
-  }
+    backgroundColor: "red",
+    marginLeft: "100px",
+  },
 });

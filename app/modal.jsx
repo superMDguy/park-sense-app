@@ -5,12 +5,20 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Button } from "react-native-ui-lib";
 import { QrCodeSvg } from "react-native-qr-svg";
 import ScanQR from "../components/ScanQR";
+import { router } from "expo-router";
 
 import { Text, View } from "~/components/Themed";
 import { Colors } from "react-native-ui-lib";
 
 export default function ModalScreen() {
   const [screen, setScreen] = useState(null);
+
+  function finish() {
+    setScreen("done");
+    setTimeout(() => {
+      router.navigate("/");
+    }, 2000);
+  }
 
   return (
     <View style={styles.container}>
@@ -45,11 +53,7 @@ export default function ModalScreen() {
             frameSize={300}
             style={{ margin: 40 }}
           />
-          <Button
-            label="Done"
-            style={{ width: "80%" }}
-            onPress={() => setScreen("done")}
-          />
+          <Button label="Done" style={{ width: "80%" }} onPress={finish} />
         </>
       )}
       {screen === "done" && (
